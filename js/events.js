@@ -45,12 +45,12 @@ function addEvent(event) {
     };
 
     var xhttp = new XMLHttpRequest();
-    try {
-        xhttp.open("POST", "https://dhbw.cheekbyte.de/calendar/claben/events", false);
-        xhttp.send(JSON.stringify(event));
-    } catch (error) {
-        console.log("Fehler! " + error);
-    }
+
+    xhttp.open("POST", "https://dhbw.cheekbyte.de/calendar/claben/events", false);
+    xhttp.send(JSON.stringify(event));
+
+    console.log("Fehler! " + error);
+
 }
 
 function getAllEvents() {
@@ -76,5 +76,12 @@ function getCategories() {
 }
 
 function addCategory() {
+    allCategories = [];
+    var xhttp = new XMLHttpRequest();
+    xhttp.open("GET", "https://dhbw.cheekbyte.de/calendar/claben/categories", false);
+    xhttp.send();
 
+    let response = JSON.parse(xhttp.responseText);
+    allCategories = response;
+    console.log(response);
 }
