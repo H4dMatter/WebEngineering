@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>CalenderbyHuesgesClaben</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
+    <script src='main.js'></script>
+
+    <script>
+            function getElementWidth(){
+                var elmnt = document.getElementById("Zwo").offsetWidth;
+                var txt="";
+                txt=elmnt +"px\t";
+                return txt;
+            } //Diese Funktion soll eigentlich die Breite der Tabelle zrückgeben und in Funktion Design einfüge - klappt aber nocht nicht 
+    
+    </script>
+    
+    <style>
+        
+        .input:hover{
+            border:2px solid #2f4f4f;
+        }
+
+        .button:hover{
+            background-color: #2f4f4f;
+            color: #d0b0b0;
+        }
+
+        #ResultTable, #ResultTable th, #ResultTable td{
+            border-collapse: collapse;
+            border: 1px solid #2f4f4f;
+            }
+
+
+        th {
+            color:  #2f4f4f;
+            font-weight: normal;
+            height: 25px;
+        }
+
+        table {
+            width: 100%;
+        }
+        
+        .Design{
+            width: 550px;
+            position: fixed;
+            left: 500px;
+            top:8px;
+        }
+
+        h1{
+            color: #2f4f4f; 
+        }
+
+        fieldset{
+            background-color: #f4ecec;
+            border: 1px solid #2f4f4f;
+            border-radius: 5px;
+            width: 350px;
+            
+        }
+
+        legend {
+            color: #2f4f4f;
+            font-size: 200%;
+        }
+
+    </style>
+</head>
+<body style="background-color:#d0b0b0;">
+ 
+    <fieldset > 
+        <legend>Mandatory Inputs</legend>
+        <table class="InputTable">
+            <tr>
+                <td>
+                    <label for="title">Title</label>
+                </td>
+                <td>
+                    <input type="text" id="title" name="Title" placeholder="(Title)" maxlength="50" class="input" required="required" />
+                </td>
+            </tr>   
+            <tr>
+                <td>
+                    <label for="email">Email</label>
+                </td>
+                <td>
+                    <input type="email" id="email" name="Organizer" placeholder="(E-Mail)" maxlength="50" class="input" required="required"/>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="Start">From</label>
+                </td>
+                <td>
+                    <input type="datetime-local" id="Start" name="Start" placeholder="(Start)" class="input" class="date" required="required"/>
+                </td>
+            </tr> 
+            <tr>
+                <td>
+                    <label for="End">To</label>
+                </td>
+                <td>
+                    <input type="datetime-local" id="End" name="End" placeholder="(End)" class="input" class="date" required="required"/>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="Shownas">Shown as</label>
+                </td>
+                <td>
+                    <select id="Shownas" name="Status" value="Busy" class="input">
+                        <option>Busy</option>
+                        <option>Free</option>
+                        <option>Tentative</option>
+                    </select>
+                </td>
+            </tr>
+
+    </table>
+        
+    </fieldset>
+
+</br>
+
+    <fieldset id="Zwo">
+        <legend>Optional Inputs</legend>
+        <table class="InputTable">
+            <tr>
+                <td>
+                    <label for="location">Location</label>
+                </td>
+                <td>
+                    <input type="text" id="location" name="Location" placeholder="(Location)" maxlength="50" class="input"/> 
+
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="Allday">Allday</label>
+                </td>
+                <td>
+                    <input type="radio" name="Allday" value="Allday">Yes</input>
+                    <input type="radio" name="Allday" value="Allday" checked="checked">No</input>  
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    <label for="Categories">Category</label> 
+                </td>
+                <td>
+                    <select name="Categories" id="Categories" value="Busy" class="input">
+                        <option>Private</option>
+                        <option>Business</option>
+                        <option>None</option>
+                        <option>Add category</option>
+                    </select>  
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    <label for="url">URL</label>
+                </td>
+                <td>
+                    <datalist id="url">
+                        <option label="DHBW" value="http://www.dhbw-stuttgart.de"></option>
+                        <option label="HPE" value="https://www.hpe.com/us/en/home.html"></option>
+                        <option label="DXC" value="https://www.dxc.technology/"></option>
+                    </datalist>
+                    <input list="url" id="url" placeholder="(URL)" class="input" maxlength="100"/>            
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="ImageUpload">Image</label>
+                </td>
+                <td>
+                    <input type="file" name="ImageUpload" id="ImageUpload" class="button" />           
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="CommentField">Comments</label>
+                </td>
+                <td>
+                    <textarea name="CommentField" id="CommentField" rows="2" cols="20" placeholder="(Any Comments)" maxlength="2000" class="input"></textarea>         
+                </td>
+            </tr>
+        
+        </table>
+    </br>
+    </fieldset>
+    
+    </br>
+            <button class="button">Send</button>
+            <button class="button">Reset</button>
+
+</br>
+
+  <fieldset class="Design">
+        <legend>Resulting List</legend>
+        <table id="ResultTable" >
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Organizer</th>
+                    <th>Start-End</th>
+                    <th>Status</th>
+                    <th>Location</th>
+                    <th>Allday</th>
+                    <th>Category</th>
+                    <th>WebPage</th>
+                    <th>Image</th>
+                </tr>
+            </thead>
+            <tbody>
+
+            </tbody>
+
+    </fieldset>
+        </table>
+    </div>
+<br>
+    <button onclick="alert(getElementWidth())">Klicken</button>
+</body>
+</html>
