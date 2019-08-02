@@ -3,7 +3,7 @@
 <head>
     <meta charset='utf-8'>
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
-    <title>CalenderbyHuesgesClaben</title>
+    <title>PrettyinPinkCalender</title>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
     <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
     <script src='main.js'></script>
@@ -15,11 +15,26 @@
                 txt=elmnt +"px\t";
                 return txt;
             } //Diese Funktion soll eigentlich die Breite der Tabelle zrückgeben und in Funktion Design einfüge - klappt aber nocht nicht 
+            
+            function displayWeather (){
+
+                var loc=document.getElementById("wetter").value;
+                return loc;
+
+            }
     
     </script>
     
     <style>
-        
+        .newsfeed{
+            width: 98%;
+            height: 500px;
+        }
+
+        iframe.newsfeed{
+            height: 450px;
+            
+        }
         .input:hover{
             border:2px solid #2f4f4f;
         }
@@ -47,7 +62,7 @@
         
         .Design{
             width: 550px;
-            position: fixed;
+            position: absolute;
             left: 500px;
             top:8px;
         }
@@ -222,10 +237,23 @@
             <tbody>
 
             </tbody>
-
-    </fieldset>
         </table>
-    </div>
+    </fieldset>
+    
+</br>
+
+    <fieldset class="wetter">
+        <input name="wetter" id="wetter" placeholder="eg. Berlin, Stuttgart..." />
+        <button class="button" onclick="alert(displayWeather())">getWeather</button>
+    </fieldset>
+
+</br>
+
+    <fieldset class="newsfeed">
+        <legend>Tagesschau</legend>
+        <iframe src="https://www.tagesschau.de" class="newsfeed"></iframe>
+    </fieldset>
+        
 <br>
     <button onclick="alert(getElementWidth())">Klicken</button>
 </body>
