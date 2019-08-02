@@ -18,23 +18,41 @@
             
             function displayWeather (){
 
-                var loc=document.getElementById("wetter").value;
-                return loc;
+                try{
+                    var sibling=document.getElementById("InputWetter").value;
+                    var ifrm = document.createElement("iframe");
+                    ifrm.setAttribute("src", "https://www.wetteronline.de/"+sibling);
+                    ifrm.style.width = "100%";
+                    ifrm.style.height = "450px";
+                    ifrm.style.borderRadius = "5px";
+                    ifrm.style.border = "1px solid #2f4f4f";
+                    document.getElementById("wetter").appendChild(ifrm);
+                return "Done";
+                } catch (Exception) {
+                    return "Unfortunately we couldn't get the weather-data. Please check the correct spelling of the city.";
+                }
 
             }
     
     </script>
     
     <style>
+        #wetter{
+            width: 98%;
+        }
         .newsfeed{
             width: 98%;
             height: 500px;
         }
 
         iframe.newsfeed{
-            height: 450px;
-            
+            height: 450px; 
+            width: 100%;
+            border-collapse: collapse;
+            border: 1px solid #2f4f4f;
+            border-radius: 5px;
         }
+
         .input:hover{
             border:2px solid #2f4f4f;
         }
@@ -242,14 +260,18 @@
     
 </br>
 
-    <fieldset class="wetter">
-        <input name="wetter" id="wetter" placeholder="eg. Berlin, Stuttgart..." />
-        <button class="button" onclick="alert(displayWeather())">getWeather</button>
+    <fieldset class="wetter" id="wetter">
+        <legend>Weather</legend>
+        <input class="input" name="wetter" id="InputWetter" placeholder="eg. Berlin, Stuttgart..." />
+        <button class="button" id="WetterButton" onclick="alert(displayWeather())">getWeather</button>
+    </br>
     </fieldset>
+
+
 
 </br>
 
-    <fieldset class="newsfeed">
+    <fieldset class="newsfeed" id="newsfeed">
         <legend>Tagesschau</legend>
         <iframe src="https://www.tagesschau.de" class="newsfeed"></iframe>
     </fieldset>
