@@ -1,12 +1,15 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
     <meta charset='utf-8'>
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
     <title>PrettyinPinkCalender</title>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
-    <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
-    <script src='main.js'></script>
+    <!-- <link rel='stylesheet' type='text/css' media='screen' href='main.css'> -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src='./js/events.js'></script>
+
 
     <script>
             function getElementWidth(){
@@ -35,7 +38,7 @@
             }
     
     </script>
-    
+
     <style>
         #wetter{
             width: 98%;
@@ -57,19 +60,25 @@
             border:2px solid #2f4f4f;
         }
 
-        .button:hover{
+        .input:hover {
+            border: 2px solid #2f4f4f;
+        }
+
+        .button:hover {
             background-color: #2f4f4f;
             color: #d0b0b0;
         }
 
-        #ResultTable, #ResultTable th, #ResultTable td{
+        #ResultTable,
+        #ResultTable th,
+        #ResultTable td {
             border-collapse: collapse;
             border: 1px solid #2f4f4f;
-            }
+        }
 
 
         th {
-            color:  #2f4f4f;
+            color: #2f4f4f;
             font-weight: normal;
             height: 25px;
         }
@@ -77,36 +86,36 @@
         table {
             width: 100%;
         }
-        
-        .Design{
+
+        .Design {
             width: 550px;
             position: absolute;
             left: 500px;
-            top:8px;
+            top: 8px;
         }
 
-        h1{
-            color: #2f4f4f; 
+        h1 {
+            color: #2f4f4f;
         }
 
-        fieldset{
+        fieldset {
             background-color: #f4ecec;
             border: 1px solid #2f4f4f;
             border-radius: 5px;
             width: 350px;
-            
+
         }
 
         legend {
             color: #2f4f4f;
             font-size: 200%;
         }
-
     </style>
 </head>
+
 <body style="background-color:#d0b0b0;">
- 
-    <fieldset > 
+
+    <fieldset>
         <legend>Mandatory Inputs</legend>
         <table class="InputTable">
             <tr>
@@ -114,15 +123,17 @@
                     <label for="title">Title</label>
                 </td>
                 <td>
-                    <input type="text" id="title" name="Title" placeholder="(Title)" maxlength="50" class="input" required="required" />
+                    <input type="text" id="title" name="Title" placeholder="(Title)" maxlength="50" class="input"
+                        required="required" />
                 </td>
-            </tr>   
+            </tr>
             <tr>
                 <td>
                     <label for="email">Email</label>
                 </td>
                 <td>
-                    <input type="email" id="email" name="Organizer" placeholder="(E-Mail)" maxlength="50" class="input" required="required"/>
+                    <input type="email" id="email" name="Organizer" placeholder="(E-Mail)" maxlength="50" class="input"
+                        required="required" />
                 </td>
             </tr>
             <tr>
@@ -130,15 +141,17 @@
                     <label for="Start">From</label>
                 </td>
                 <td>
-                    <input type="datetime-local" id="Start" name="Start" placeholder="(Start)" class="input" class="date" required="required"/>
+                    <input type="datetime-local" id="Start" name="Start" placeholder="(Start)" class="input"
+                        class="date" required="required" />
                 </td>
-            </tr> 
+            </tr>
             <tr>
                 <td>
                     <label for="End">To</label>
                 </td>
                 <td>
-                    <input type="datetime-local" id="End" name="End" placeholder="(End)" class="input" class="date" required="required"/>
+                    <input type="datetime-local" id="End" name="End" placeholder="(End)" class="input" class="date"
+                        required="required" />
                 </td>
             </tr>
             <tr>
@@ -154,11 +167,11 @@
                 </td>
             </tr>
 
-    </table>
-        
+        </table>
+
     </fieldset>
 
-</br>
+    </br>
 
     <fieldset id="Zwo">
         <legend>Optional Inputs</legend>
@@ -168,7 +181,8 @@
                     <label for="location">Location</label>
                 </td>
                 <td>
-                    <input type="text" id="location" name="Location" placeholder="(Location)" maxlength="50" class="input"/> 
+                    <input type="text" id="location" name="Location" placeholder="(Location)" maxlength="50"
+                        class="input" />
 
                 </td>
             </tr>
@@ -178,13 +192,13 @@
                 </td>
                 <td>
                     <input type="radio" name="Allday" value="Allday">Yes</input>
-                    <input type="radio" name="Allday" value="Allday" checked="checked">No</input>  
+                    <input type="radio" name="Allday" value="Allday" checked="checked">No</input>
                 </td>
             </tr>
 
             <tr>
                 <td>
-                    <label for="Categories">Category</label> 
+                    <label for="Categories">Category</label>
                 </td>
                 <td>
                     <select name="Categories" id="Categories" value="Busy" class="input">
@@ -192,7 +206,7 @@
                         <option>Business</option>
                         <option>None</option>
                         <option>Add category</option>
-                    </select>  
+                    </select>
                 </td>
             </tr>
 
@@ -206,7 +220,7 @@
                         <option label="HPE" value="https://www.hpe.com/us/en/home.html"></option>
                         <option label="DXC" value="https://www.dxc.technology/"></option>
                     </datalist>
-                    <input list="url" id="url" placeholder="(URL)" class="input" maxlength="100"/>            
+                    <input list="url" id="url" placeholder="(URL)" class="input" maxlength="100" />
                 </td>
             </tr>
             <tr>
@@ -214,7 +228,7 @@
                     <label for="ImageUpload">Image</label>
                 </td>
                 <td>
-                    <input type="file" name="ImageUpload" id="ImageUpload" class="button" />           
+                    <input type="file" name="ImageUpload" id="ImageUpload" class="button" />
                 </td>
             </tr>
             <tr>
@@ -222,23 +236,24 @@
                     <label for="CommentField">Comments</label>
                 </td>
                 <td>
-                    <textarea name="CommentField" id="CommentField" rows="2" cols="20" placeholder="(Any Comments)" maxlength="2000" class="input"></textarea>         
+                    <textarea name="CommentField" id="CommentField" rows="2" cols="20" placeholder="(Any Comments)"
+                        maxlength="2000" class="input"></textarea>
                 </td>
             </tr>
-        
+
         </table>
-    </br>
+        </br>
     </fieldset>
-    
+
     </br>
-            <button class="button">Send</button>
-            <button class="button">Reset</button>
+    <button class="button">Send</button>
+    <button class="button">Reset</button>
 
-</br>
+    </br>
 
-  <fieldset class="Design">
+    <fieldset class="Design">
         <legend>Resulting List</legend>
-        <table id="ResultTable" >
+        <table id="ResultTable">
             <thead>
                 <tr>
                     <th>Title</th>
@@ -279,4 +294,5 @@
 <br>
     <button onclick="alert(getElementWidth())">Klicken</button>
 </body>
+
 </html>
