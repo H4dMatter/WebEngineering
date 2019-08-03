@@ -1,0 +1,54 @@
+ .class {
+            vertical-align: right;
+        }
+
+        .input:hover {
+            border: 2px solid #2f4f4f;
+        }
+
+        .button:hover {
+            background-color: #2f4f4f;
+            color: #d0b0b0;
+        }
+
+        #ResultTable,
+        #ResultTable th,
+        #ResultTable td {
+            border-collapse: collapse;
+            border: 1px solid #2f4f4f;
+        }
+
+
+        th {
+            color: #2f4f4f;
+            font-weight: normal;
+            height: 25px;
+        }
+
+        table {
+            width: 100%;
+        }
+
+        .Design {
+            width: 550px;
+            position: fixed;
+            left: 500px;
+            top: 8px;
+        }
+
+        h1 {
+            color: #2f4f4f;
+        }
+
+        fieldset {
+            background-color: #f4ecec;
+            border: 1px solid #2f4f4f;
+            border-radius: 5px;
+            width: 350px;
+
+        }
+
+        legend {
+            color: #2f4f4f;
+            font-size: 200%;
+        }
