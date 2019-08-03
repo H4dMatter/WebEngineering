@@ -4,7 +4,7 @@
 <head>
     <meta charset='utf-8'>
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
-    <title>CalenderbyHuesgesClaben</title>
+    <title>PrettyinPinkCalender</title>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
     <link rel='stylesheet' type='text/css' media='screen' href='./css/main.css'>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
@@ -12,15 +12,105 @@
 
 
     <script>
-        function getElementWidth() {
-            var elmnt = document.getElementById("ResultTable").offsetWidth;
-            var elmntZwo = document.getElementById("Zwo").offsetHeight;
-            var txt = "";
-            txt = elmnt + "px\t" + elmntZwo + "px\t";
-            return txt;
-        } //Diese Funktion soll eigentlich die Breite der Tabelle zrückgeben und in Funktion Design einfüge - klappt aber nocht nicht 
+            function getElementWidth(){
+                var elmnt = document.getElementById("Zwo").offsetWidth;
+                var txt="";
+                txt=elmnt +"px\t";
+                return txt;
+            } //Diese Funktion soll eigentlich die Breite der Tabelle zrückgeben und in Funktion Design einfüge - klappt aber nocht nicht 
+            
+            function displayWeather (){
 
+                try{
+                    var sibling=document.getElementById("InputWetter").value;
+                    var ifrm = document.createElement("iframe");
+                    ifrm.setAttribute("src", "https://www.wetteronline.de/"+sibling);
+                    ifrm.style.width = "100%";
+                    ifrm.style.height = "450px";
+                    ifrm.style.borderRadius = "5px";
+                    ifrm.style.border = "1px solid #2f4f4f";
+                    document.getElementById("wetter").appendChild(ifrm);
+                return "Done";
+                } catch (Exception) {
+                    return "Unfortunately we couldn't get the weather-data. Please check the correct spelling of the city.";
+                }
+
+            }
+    
     </script>
+
+    <style>
+        #wetter{
+            width: 98%;
+        }
+        .newsfeed{
+            width: 98%;
+            height: 500px;
+        }
+
+        iframe.newsfeed{
+            height: 450px; 
+            width: 100%;
+            border-collapse: collapse;
+            border: 1px solid #2f4f4f;
+            border-radius: 5px;
+        }
+
+        .input:hover{
+            border:2px solid #2f4f4f;
+        }
+
+        .input:hover {
+            border: 2px solid #2f4f4f;
+        }
+
+        .button:hover {
+            background-color: #2f4f4f;
+            color: #d0b0b0;
+        }
+
+        #ResultTable,
+        #ResultTable th,
+        #ResultTable td {
+            border-collapse: collapse;
+            border: 1px solid #2f4f4f;
+        }
+
+
+        th {
+            color: #2f4f4f;
+            font-weight: normal;
+            height: 25px;
+        }
+
+        table {
+            width: 100%;
+        }
+
+        .Design {
+            width: 550px;
+            position: absolute;
+            left: 500px;
+            top: 8px;
+        }
+
+        h1 {
+            color: #2f4f4f;
+        }
+
+        fieldset {
+            background-color: #f4ecec;
+            border: 1px solid #2f4f4f;
+            border-radius: 5px;
+            width: 350px;
+
+        }
+
+        legend {
+            color: #2f4f4f;
+            font-size: 200%;
+        }
+    </style>
 </head>
 
 <body style="background-color:#d0b0b0;">
@@ -180,11 +270,28 @@
             <tbody>
 
             </tbody>
-
+        </table>
     </fieldset>
-    </table>
-    </div>
-    <br>
+    
+</br>
+
+    <fieldset class="wetter" id="wetter">
+        <legend>Weather</legend>
+        <input class="input" name="wetter" id="InputWetter" placeholder="eg. Berlin, Stuttgart..." />
+        <button class="button" id="WetterButton" onclick="alert(displayWeather())">getWeather</button>
+    </br>
+    </fieldset>
+
+
+
+</br>
+
+    <fieldset class="newsfeed" id="newsfeed">
+        <legend>Tagesschau</legend>
+        <iframe src="https://www.tagesschau.de" class="newsfeed"></iframe>
+    </fieldset>
+        
+<br>
     <button onclick="alert(getElementWidth())">Klicken</button>
 </body>
 
