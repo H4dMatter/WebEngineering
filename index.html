@@ -6,7 +6,7 @@
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
     <title>PrettyinPinkCalender</title>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
-    <!-- <link rel='stylesheet' type='text/css' media='screen' href='main.css'> -->
+    <link rel='stylesheet' type='text/css' media='screen' href='./css/main.css'>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src='./js/events.js'></script>
 
@@ -138,28 +138,28 @@
             </tr>
             <tr>
                 <td>
-                    <label for="Start">From</label>
+                    <label for="start">From</label>
                 </td>
                 <td>
-                    <input type="datetime-local" id="Start" name="Start" placeholder="(Start)" class="input"
+                    <input type="datetime-local" id="start" name="start" placeholder="(Start)" class="input"
                         class="date" required="required" />
                 </td>
             </tr>
             <tr>
                 <td>
-                    <label for="End">To</label>
+                    <label for="end">To</label>
                 </td>
                 <td>
-                    <input type="datetime-local" id="End" name="End" placeholder="(End)" class="input" class="date"
+                    <input type="datetime-local" id="end" name="end" placeholder="(End)" class="input" class="date"
                         required="required" />
                 </td>
             </tr>
             <tr>
                 <td>
-                    <label for="Shownas">Shown as</label>
+                    <label for="shownAs">Shown as</label>
                 </td>
                 <td>
-                    <select id="Shownas" name="Status" value="Busy" class="input">
+                    <select id="shownAs" name="Status" value="Busy" class="input">
                         <option>Busy</option>
                         <option>Free</option>
                         <option>Tentative</option>
@@ -188,23 +188,23 @@
             </tr>
             <tr>
                 <td>
-                    <label for="Allday">Allday</label>
+                    <label for="allday">Allday</label>
                 </td>
                 <td>
-                    <input type="radio" name="Allday" value="Allday">Yes</input>
-                    <input type="radio" name="Allday" value="Allday" checked="checked">No</input>
+                    <input type="radio" id="allday" name="allday" value="allday">Yes</input>
+                    <input type="radio" name="allday" value="allday" checked="checked">No</input>
                 </td>
             </tr>
 
             <tr>
                 <td>
-                    <label for="Categories">Category</label>
+                    <label for="categories">Category</label>
                 </td>
                 <td>
-                    <select name="Categories" id="Categories" value="Busy" class="input">
+                    <select name="categories" id="categories" value="None" class="input">
                         <option>Private</option>
                         <option>Business</option>
-                        <option>None</option>
+                        <option selected="true">None</option>
                         <option>Add category</option>
                     </select>
                 </td>
@@ -225,18 +225,18 @@
             </tr>
             <tr>
                 <td>
-                    <label for="ImageUpload">Image</label>
+                    <label for="imageUpload">Image</label>
                 </td>
                 <td>
-                    <input type="file" name="ImageUpload" id="ImageUpload" class="button" />
+                    <input type="file" name="imageUpload" id="imageUpload" class="button" />
                 </td>
             </tr>
             <tr>
                 <td>
-                    <label for="CommentField">Comments</label>
+                    <label for="commentField">Comments</label>
                 </td>
                 <td>
-                    <textarea name="CommentField" id="CommentField" rows="2" cols="20" placeholder="(Any Comments)"
+                    <textarea name="commentField" id="commentField" rows="2" cols="20" placeholder="(Any Comments)"
                         maxlength="2000" class="input"></textarea>
                 </td>
             </tr>
@@ -246,8 +246,8 @@
     </fieldset>
 
     </br>
-    <button class="button">Send</button>
-    <button class="button">Reset</button>
+    <button class="button" id="send">Send</button>
+    <button class="button" id="reset" onclick="getInputData()">Reset</button>
 
     </br>
 
