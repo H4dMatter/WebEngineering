@@ -10,6 +10,81 @@
     <link rel='stylesheet' type='text/css' media='print' href='./css/printversion.css'>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src='./js/events.js'></script>
+
+
+    <style>
+        #wetter {
+            width: 98%;
+        }
+
+        .newsfeed {
+            width: 98%;
+            height: 500px;
+        }
+
+        iframe.newsfeed {
+            height: 450px;
+            width: 100%;
+            border-collapse: collapse;
+            border: 1px solid #2f4f4f;
+            border-radius: 5px;
+        }
+
+        .input:hover {
+            border: 2px solid #2f4f4f;
+        }
+
+        .input:hover {
+            border: 2px solid #2f4f4f;
+        }
+
+        .button:hover {
+            background-color: #2f4f4f;
+            color: #d0b0b0;
+        }
+
+        #ResultTable,
+        #ResultTable th,
+        #ResultTable td {
+            border-collapse: collapse;
+            border: 1px solid #2f4f4f;
+        }
+
+
+        th {
+            color: #2f4f4f;
+            font-weight: normal;
+            height: 25px;
+        }
+
+        table {
+            width: 100%;
+        }
+
+        .Design {
+            width: 550px;
+            position: absolute;
+            left: 500px;
+            top: 8px;
+        }
+
+        h1 {
+            color: #2f4f4f;
+        }
+
+        fieldset {
+            background-color: #f4ecec;
+            border: 1px solid #2f4f4f;
+            border-radius: 5px;
+            width: 350px;
+
+        }
+
+        legend {
+            color: #2f4f4f;
+            font-size: 200%;
+        }
+    </style>
 </head>
 
 <body style="background-color:#d0b0b0;">
@@ -28,11 +103,11 @@
             </tr>
             <tr>
                 <td>
-                    <label for="email">Email</label>
+                    <label for="organizer">Email</label>
                 </td>
                 <td>
-                    <input type="email" id="email" name="Organizer" placeholder="(E-Mail)" maxlength="50" class="input"
-                        required="required" />
+                    <input type="email" id="organizer" name="Organizer" placeholder="(E-Mail)" maxlength="50"
+                        class="input" required="required" />
                 </td>
             </tr>
             <tr>
@@ -53,11 +128,11 @@
             </tr>
             <tr>
                 <td>
-                    <label for="shownAs">Shown as</label>
+                    <label for="status">Shown as</label>
                 </td>
                 <td>
-                    <select id="shownAs" name="Status" class="input">
-                        <option selected>Busy</option>
+                    <select id="status" name="status" value="Busy" class="input">
+                        <option>Busy</option>
                         <option>Free</option>
                         <option>Tentative</option>
                     </select>
@@ -145,31 +220,30 @@
 
     <br>
     <button class="button" id="send">Send</button>
-    <button class="button" id="reset" onclick="getInputData()">Reset</button>
-    <button class="button" id="print" onclick="printResultTable()">PrintCalender</button>
+    <button class="button" id="reset">Reset</button>
+    <button id="click">Klicken</button>
+    <button id="test" onclick="test()">Einfügen</button>
 
     <br>
 
 <div class="printZWO" id="printZWO">
     <fieldset class="Design" id="resultListFieldset"> 
         <legend>Resulting List</legend>
-        <table id="ResultTable">
+        <table id="resultTable">
             <thead>
                 <tr>
-                    <th>Title</th>
-                    <th>Organizer</th>
-                    <th>Start-End</th>
-                    <th>Status</th>
-                    <th>Location</th>
-                    <th>Allday</th>
-                    <th>Category</th>
-                    <th>WebPage</th>
-                    <th>Image</th>
+                    <th id="titleOut">Title</th>
+                    <th id="organizerOut">Organizer</th>
+                    <th id="startOut">Start</th>
+                    <th id="endOut">End</th>
+                    <th id="statusOut">Status</th>
+                    <th id="locationOut">Location</th>
+                    <th id="alldayOut">Allday</th>
+                    <th id="categoriesOut">Category</th>
+                    <th id="webpageOut">WebPage</th>
+                    <th id="imageurlOut">Image</th>
                 </tr>
             </thead>
-            <tbody>
-
-            </tbody>
         </table>
     </fieldset>
 </div>
@@ -185,7 +259,7 @@
     
 <br>
 
-    <fieldset class="newsfeed" id="newsfeed">
+    <!-- <fieldset class="newsfeed" id="newsfeed">
         <legend>Tagesschau</legend>
         <iframe src="https://www.tagesschau.de" class="newsfeed"></iframe>
     </fieldset>

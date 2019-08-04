@@ -3,70 +3,123 @@ var allCategories = [];
 
 $(document).ready(function () {
 
-
-    function gatherData() {
-        var eventJSON = {};
-        var inputFields = $(".input");
-
-        console.log($(".input"));
-        console.log($("#allday")[0].checked)
-        $(".input").each(function (key, value) {
-            console.log(this.id + ":" + this.value);
-            eventJSON[key] = value;
-        });
-        eventJSON["allday"] = $("#allday")[0].checked;
-        console.log(eventJSON);
-        return eventJSON;
-    }
-
     $("#reset").click(
-        gatherData()
+        function gatherData() {
+            var eventJSON = {};
+            var inputFields = $(".input");
+
+            console.log($(".input"));
+            console.log($("#allday")[0].checked)
+            $(".input").each(function (key, value) {
+
+                if (this.value != "") {
+                    eventJSON[this.id] = this.value.trim();
+                }
+            });
+            eventJSON["allday"] = $("#allday")[0].checked;
+            if (eventJSON["categories"] = "None") {
+                delete eventJSON["categories"];
+            }
+            console.log(eventJSON);
+            //return eventJSON;
+        }
     );
 
 
     //real functions
     $("#send").click(
         function addEvent(event) {
-            event = gatherData();
-            // event = {
-            //     "id": 1, //ignoriert das id Feld automatisch -> auch andere Zusatzfelder(?)
-            //     "title": " Christmas Feast",
-            //     "location": "Stuttgart",
-            //     "organizer": "danny @dxc.com",
-            //     "start": "2014-12-24T18:00",
-            //     "end": "2014-12-24T23:00",
-            //     "status": "Busy",
-            //     "allday": false,
 
-            // };
+            var eventJSON = {};
+
+
+            $(".input").each(function (key, value) {
+                if (this.value != "") {
+                    eventJSON[this.id] = this.value;
+                }
+            });
+            eventJSON["allday"] = $("#allday")[0].checked;
+            if (eventJSON["categories"] = "None") {
+                delete eventJSON["categories"];
+            }
+            console.log(JSON.stringify(eventJSON));
+            var inputFields = JSON.stringify(eventJSON);
 
             $.ajax({
                 type: "POST",
                 url: "https://dhbw.cheekbyte.de/calendar/claben/events",
-                data: JSON.stringify(event),
+                data: inputFields,
                 success: function () { alert("success") },
-                error: function (xhr, status, error) { alert("fail " + xhr.status + xhr.statusText) }
+                error: function (xhr, status, error) { alert("fail " + xhr.status + xhr.statusText + error) }
             });
-            // var xhttp = new XMLHttpRequest();
 
-            // xhttp.open("POST", "https://dhbw.cheekbyte.de/calendar/claben/events", false);
-            // xhttp.send(JSON.stringify(event));
+        }
+    );
 
-        });
+    $("#click").click(
+        function getAllEvents() {
+            allEvents = [];
+
+            $.ajax({
+                type: "GET",
+                url: "https://dhbw.cheekbyte.de/calendar/claben/events",
+                success: function (result, status, xhr) {
+                    alert(status);
+                    console.log(result);
+                    allEvents = result;
+
+                    result.forEach(element => {
+                        var data = [];
+                        for (let key in element) {
+                            if ($("#" + key + "Out")[0] != null) {
+                                data[$("#" + key + "Out")[0].cellIndex] = element[key];
+                            }
+                        };
+                        if (data[7].length == 0) data[7] = "None"
+                        console.log(data);
+                        let newRow = document.getElementById("resultTable").insertRow(-1);
+                        for (let i = 0; i < data.length; i++) {
+                            let cell = newRow.insertCell(-1);
+                            if (data[i] == null) cell.innerHTML = "-";
+                            else {
+                                cell.innerHTML = data[i];
+                            }
+                        }
+                        // for (let key in element) {
+                        //     console.log(key);
+                        //     if ($("#" + key + "Out")[0] != null) {
+                        //         console.log("CELLINDEX: " + $("#" + key + "Out")[0].cellIndex)
+                        //         console.log("#" + key + "Out")
+                        //         console.log($("#resultTable > thead > tr")[0].cells)
+                        //         console.log(newRow.cells);
+                        //         //$("#resultTable > thead >tr")[0].cells[$("#" + key + "Out")[0].cellIndex].innerHTML = element[key];
+                        //         //newRow.cells[$("#resultTable > thead >tr")[0].cells[$("#" + key + "Out")[0].cellIndex]].innerHTML = element[key];
+
+                        //         // if (key == "extra" || key == "id") continue;
+                        //         // console.log(key + ":" + element[key])
+                        //         // let cell = newRow.insertCell(-1);
+                        //         // cell.innerHTML = element[key];
+                        //     }
+                        // }
+                    });
+
+                },
+                error: function (xhr, status, error) { alert("fail " + xhr.status + xhr.statusText + error) }
+            });
+        }
+    );
 
 
 });
 
 
-function getAllEvents() {
-    allEvents = [];
-    var xhttp = new XMLHttpRequest();
-    xhttp.open("GET", "https://dhbw.cheekbyte.de/calendar/claben/events", false);
-    xhttp.send();
-
-    let response = JSON.parse(xhttp.responseText);
-    allEvents = response;
-    console.log(response);
+function table() {
+    let newRow = document.getElementById("resultTable").insertRow(-1);
+    for (let i = 0; i < 9; i++)//TODO: replace with no hardcode
+    {
+        let cell = newRow.insertCell(i);
+        cell.innerHTML = "New cell";
+    }
 }
 
 function getCategories() {
@@ -92,17 +145,10 @@ function addCategory() {
 }
 //Test functions
 function test() {
+    count = [];
 
-    var string = "";
-    for (let i = 0; i < allEvents.length; i++) {
-        console.log(allEvents[i]);
-        let element = allEvents[i];
-        for (var key in element) {
-            string += element[key] + " ";
-        }
-        console.log(string);
-        string = "";
-    }
+    count[4] = "hi";
+    console.log(count);
 }
 
 /**
