@@ -1,0 +1,3 @@
+@media print{
+    #mandatory, #optional, #wetter, #newsfeed, .button, #site { display: none; }
+}

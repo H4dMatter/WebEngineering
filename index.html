@@ -4,9 +4,10 @@
 <head>
     <meta charset='utf-8'>
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
-    <title>PrettyinPinkCalender</title>
+    <title id="site">PrettyinPinkCalender</title>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
     <link rel='stylesheet' type='text/css' media='screen' href='./css/main.css'>
+    <link rel='stylesheet' type='text/css' media='print' href='./css/printversion.css'>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src='./js/events.js'></script>
 
@@ -88,7 +89,7 @@
 
 <body style="background-color:#d0b0b0;">
 
-    <fieldset>
+    <fieldset id="mandatory">
         <legend>Mandatory Inputs</legend>
         <table class="InputTable">
             <tr>
@@ -114,8 +115,7 @@
                     <label for="start">From</label>
                 </td>
                 <td>
-                    <input type="datetime-local" id="start" name="start" placeholder="(Start)" class="input"
-                        class="date" required="required" />
+                    <input type="datetime-local" id="start" name="start" class="input" required="required" />
                 </td>
             </tr>
             <tr>
@@ -123,8 +123,7 @@
                     <label for="end">To</label>
                 </td>
                 <td>
-                    <input type="datetime-local" id="end" name="end" placeholder="(End)" class="input" class="date"
-                        required="required" />
+                    <input type="datetime-local" id="end" name="end" class="input" required="required" />
                 </td>
             </tr>
             <tr>
@@ -144,9 +143,9 @@
 
     </fieldset>
 
-    </br>
+    <br>
 
-    <fieldset id="Zwo">
+    <fieldset id="optional">
         <legend>Optional Inputs</legend>
         <table class="InputTable">
             <tr>
@@ -174,10 +173,10 @@
                     <label for="categories">Category</label>
                 </td>
                 <td>
-                    <select name="categories" id="categories" value="None" class="input">
+                    <select name="categories" id="categories" class="input">
                         <option>Private</option>
                         <option>Business</option>
-                        <option selected="true">None</option>
+                        <option selected>None</option>
                         <option>Add category</option>
                     </select>
                 </td>
@@ -185,7 +184,7 @@
 
             <tr>
                 <td>
-                    <label for="url">URL</label>
+                    <label for="inputurl">URL</label>
                 </td>
                 <td>
                     <datalist id="url">
@@ -193,7 +192,8 @@
                         <option label="HPE" value="https://www.hpe.com/us/en/home.html"></option>
                         <option label="DXC" value="https://www.dxc.technology/"></option>
                     </datalist>
-                    <input list="url" id="url" placeholder="(URL)" class="input" maxlength="100" />
+
+                    <input list="url" id="inputurl" placeholder="(URL)" class="input" maxlength="100" />
                 </td>
             </tr>
             <tr>
@@ -215,18 +215,19 @@
             </tr>
 
         </table>
-        </br>
+        <br>
     </fieldset>
 
-    </br>
+    <br>
     <button class="button" id="send">Send</button>
     <button class="button" id="reset">Reset</button>
     <button id="click">Klicken</button>
     <button id="test" onclick="test()">Einfügen</button>
 
-    </br>
+    <br>
 
-    <fieldset class="Design">
+<div class="printZWO" id="printZWO">
+    <fieldset class="Design" id="resultListFieldset"> 
         <legend>Resulting List</legend>
         <table id="resultTable">
             <thead>
@@ -245,27 +246,25 @@
             </thead>
         </table>
     </fieldset>
-
-    </br>
+</div>
+    
+<br>
 
     <fieldset class="wetter" id="wetter">
         <legend>Weather</legend>
         <input class="input" name="wetter" id="InputWetter" placeholder="eg. Berlin, Stuttgart..." />
-        <button class="button" id="WetterButton" onclick="alert(displayWeather())">getWeather</button>
-        </br>
+        <button class="button" id="WetterButton" onclick="displayWeather()">getWeather</button>
+    <br>
     </fieldset>
-
-
-
-    </br>
+    
+<br>
 
     <!-- <fieldset class="newsfeed" id="newsfeed">
         <legend>Tagesschau</legend>
         <iframe src="https://www.tagesschau.de" class="newsfeed"></iframe>
-    </fieldset> -->
-
-    <br>
-    <button onclick="alert(getElementWidth())">Klicken</button>
+    </fieldset>
+        
+<br>
 </body>
 
 </html>
