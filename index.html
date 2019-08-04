@@ -11,53 +11,26 @@
     <script src='./js/events.js'></script>
 
 
-    <script>
-            function getElementWidth(){
-                var elmnt = document.getElementById("Zwo").offsetWidth;
-                var txt="";
-                txt=elmnt +"px\t";
-                return txt;
-            } //Diese Funktion soll eigentlich die Breite der Tabelle zrückgeben und in Funktion Design einfüge - klappt aber nocht nicht 
-            
-            function displayWeather (){
-
-                try{
-                    var sibling=document.getElementById("InputWetter").value;
-                    var ifrm = document.createElement("iframe");
-                    ifrm.setAttribute("src", "https://www.wetteronline.de/"+sibling);
-                    ifrm.style.width = "100%";
-                    ifrm.style.height = "450px";
-                    ifrm.style.borderRadius = "5px";
-                    ifrm.style.border = "1px solid #2f4f4f";
-                    document.getElementById("wetter").appendChild(ifrm);
-                return "Done";
-                } catch (Exception) {
-                    return "Unfortunately we couldn't get the weather-data. Please check the correct spelling of the city.";
-                }
-
-            }
-    
-    </script>
-
     <style>
-        #wetter{
+        #wetter {
             width: 98%;
         }
-        .newsfeed{
+
+        .newsfeed {
             width: 98%;
             height: 500px;
         }
 
-        iframe.newsfeed{
-            height: 450px; 
+        iframe.newsfeed {
+            height: 450px;
             width: 100%;
             border-collapse: collapse;
             border: 1px solid #2f4f4f;
             border-radius: 5px;
         }
 
-        .input:hover{
-            border:2px solid #2f4f4f;
+        .input:hover {
+            border: 2px solid #2f4f4f;
         }
 
         .input:hover {
@@ -129,11 +102,11 @@
             </tr>
             <tr>
                 <td>
-                    <label for="email">Email</label>
+                    <label for="organizer">Email</label>
                 </td>
                 <td>
-                    <input type="email" id="email" name="Organizer" placeholder="(E-Mail)" maxlength="50" class="input"
-                        required="required" />
+                    <input type="email" id="organizer" name="Organizer" placeholder="(E-Mail)" maxlength="50"
+                        class="input" required="required" />
                 </td>
             </tr>
             <tr>
@@ -156,10 +129,10 @@
             </tr>
             <tr>
                 <td>
-                    <label for="shownAs">Shown as</label>
+                    <label for="status">Shown as</label>
                 </td>
                 <td>
-                    <select id="shownAs" name="Status" value="Busy" class="input">
+                    <select id="status" name="status" value="Busy" class="input">
                         <option>Busy</option>
                         <option>Free</option>
                         <option>Tentative</option>
@@ -247,51 +220,51 @@
 
     </br>
     <button class="button" id="send">Send</button>
-    <button class="button" id="reset" onclick="getInputData()">Reset</button>
+    <button class="button" id="reset">Reset</button>
+    <button id="click">Klicken</button>
+    <button id="test" onclick="test()">Einfügen</button>
 
     </br>
 
     <fieldset class="Design">
         <legend>Resulting List</legend>
-        <table id="ResultTable">
+        <table id="resultTable">
             <thead>
                 <tr>
-                    <th>Title</th>
-                    <th>Organizer</th>
-                    <th>Start-End</th>
-                    <th>Status</th>
-                    <th>Location</th>
-                    <th>Allday</th>
-                    <th>Category</th>
-                    <th>WebPage</th>
-                    <th>Image</th>
+                    <th id="titleOut">Title</th>
+                    <th id="organizerOut">Organizer</th>
+                    <th id="startOut">Start</th>
+                    <th id="endOut">End</th>
+                    <th id="statusOut">Status</th>
+                    <th id="locationOut">Location</th>
+                    <th id="alldayOut">Allday</th>
+                    <th id="categoriesOut">Category</th>
+                    <th id="webpageOut">WebPage</th>
+                    <th id="imageurlOut">Image</th>
                 </tr>
             </thead>
-            <tbody>
-
-            </tbody>
         </table>
     </fieldset>
-    
-</br>
+
+    </br>
 
     <fieldset class="wetter" id="wetter">
         <legend>Weather</legend>
         <input class="input" name="wetter" id="InputWetter" placeholder="eg. Berlin, Stuttgart..." />
         <button class="button" id="WetterButton" onclick="alert(displayWeather())">getWeather</button>
-    </br>
+        </br>
     </fieldset>
 
 
 
-</br>
+    </br>
 
-    <fieldset class="newsfeed" id="newsfeed">
+    <!-- <fieldset class="newsfeed" id="newsfeed">
         <legend>Tagesschau</legend>
         <iframe src="https://www.tagesschau.de" class="newsfeed"></iframe>
-    </fieldset>
-        
-<br>
+    </fieldset> -->
+
+    <br>
     <button onclick="alert(getElementWidth())">Klicken</button>
 </body>
 
