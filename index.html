@@ -4,118 +4,17 @@
 <head>
     <meta charset='utf-8'>
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
-    <title>PrettyinPinkCalender</title>
+    <title id="site">PrettyinPinkCalender</title>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
     <link rel='stylesheet' type='text/css' media='screen' href='./css/main.css'>
+    <link rel='stylesheet' type='text/css' media='print' href='./css/printversion.css'>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src='./js/events.js'></script>
-
-
-    <script>
-            function getElementWidth(){
-                var elmnt = document.getElementById("Zwo").offsetWidth;
-                var txt="";
-                txt=elmnt +"px\t";
-                return txt;
-            } //Diese Funktion soll eigentlich die Breite der Tabelle zrückgeben und in Funktion Design einfüge - klappt aber nocht nicht 
-            
-            function displayWeather (){
-
-                try{
-                    var sibling=document.getElementById("InputWetter").value;
-                    var ifrm = document.createElement("iframe");
-                    ifrm.setAttribute("src", "https://www.wetteronline.de/"+sibling);
-                    ifrm.style.width = "100%";
-                    ifrm.style.height = "450px";
-                    ifrm.style.borderRadius = "5px";
-                    ifrm.style.border = "1px solid #2f4f4f";
-                    document.getElementById("wetter").appendChild(ifrm);
-                return "Done";
-                } catch (Exception) {
-                    return "Unfortunately we couldn't get the weather-data. Please check the correct spelling of the city.";
-                }
-
-            }
-    
-    </script>
-
-    <style>
-        #wetter{
-            width: 98%;
-        }
-        .newsfeed{
-            width: 98%;
-            height: 500px;
-        }
-
-        iframe.newsfeed{
-            height: 450px; 
-            width: 100%;
-            border-collapse: collapse;
-            border: 1px solid #2f4f4f;
-            border-radius: 5px;
-        }
-
-        .input:hover{
-            border:2px solid #2f4f4f;
-        }
-
-        .input:hover {
-            border: 2px solid #2f4f4f;
-        }
-
-        .button:hover {
-            background-color: #2f4f4f;
-            color: #d0b0b0;
-        }
-
-        #ResultTable,
-        #ResultTable th,
-        #ResultTable td {
-            border-collapse: collapse;
-            border: 1px solid #2f4f4f;
-        }
-
-
-        th {
-            color: #2f4f4f;
-            font-weight: normal;
-            height: 25px;
-        }
-
-        table {
-            width: 100%;
-        }
-
-        .Design {
-            width: 550px;
-            position: absolute;
-            left: 500px;
-            top: 8px;
-        }
-
-        h1 {
-            color: #2f4f4f;
-        }
-
-        fieldset {
-            background-color: #f4ecec;
-            border: 1px solid #2f4f4f;
-            border-radius: 5px;
-            width: 350px;
-
-        }
-
-        legend {
-            color: #2f4f4f;
-            font-size: 200%;
-        }
-    </style>
 </head>
 
 <body style="background-color:#d0b0b0;">
 
-    <fieldset>
+    <fieldset id="mandatory">
         <legend>Mandatory Inputs</legend>
         <table class="InputTable">
             <tr>
@@ -141,8 +40,7 @@
                     <label for="start">From</label>
                 </td>
                 <td>
-                    <input type="datetime-local" id="start" name="start" placeholder="(Start)" class="input"
-                        class="date" required="required" />
+                    <input type="datetime-local" id="start" name="start" class="input" required="required" />
                 </td>
             </tr>
             <tr>
@@ -150,8 +48,7 @@
                     <label for="end">To</label>
                 </td>
                 <td>
-                    <input type="datetime-local" id="end" name="end" placeholder="(End)" class="input" class="date"
-                        required="required" />
+                    <input type="datetime-local" id="end" name="end" class="input" required="required" />
                 </td>
             </tr>
             <tr>
@@ -159,8 +56,8 @@
                     <label for="shownAs">Shown as</label>
                 </td>
                 <td>
-                    <select id="shownAs" name="Status" value="Busy" class="input">
-                        <option>Busy</option>
+                    <select id="shownAs" name="Status" class="input">
+                        <option selected>Busy</option>
                         <option>Free</option>
                         <option>Tentative</option>
                     </select>
@@ -171,9 +68,9 @@
 
     </fieldset>
 
-    </br>
+    <br>
 
-    <fieldset id="Zwo">
+    <fieldset id="optional">
         <legend>Optional Inputs</legend>
         <table class="InputTable">
             <tr>
@@ -201,10 +98,10 @@
                     <label for="categories">Category</label>
                 </td>
                 <td>
-                    <select name="categories" id="categories" value="None" class="input">
+                    <select name="categories" id="categories" class="input">
                         <option>Private</option>
                         <option>Business</option>
-                        <option selected="true">None</option>
+                        <option selected>None</option>
                         <option>Add category</option>
                     </select>
                 </td>
@@ -212,7 +109,7 @@
 
             <tr>
                 <td>
-                    <label for="url">URL</label>
+                    <label for="inputurl">URL</label>
                 </td>
                 <td>
                     <datalist id="url">
@@ -220,7 +117,8 @@
                         <option label="HPE" value="https://www.hpe.com/us/en/home.html"></option>
                         <option label="DXC" value="https://www.dxc.technology/"></option>
                     </datalist>
-                    <input list="url" id="url" placeholder="(URL)" class="input" maxlength="100" />
+
+                    <input list="url" id="inputurl" placeholder="(URL)" class="input" maxlength="100" />
                 </td>
             </tr>
             <tr>
@@ -242,16 +140,18 @@
             </tr>
 
         </table>
-        </br>
+        <br>
     </fieldset>
 
-    </br>
+    <br>
     <button class="button" id="send">Send</button>
     <button class="button" id="reset" onclick="getInputData()">Reset</button>
+    <button class="button" id="print" onclick="printResultTable()">PrintCalender</button>
 
-    </br>
+    <br>
 
-    <fieldset class="Design">
+<div class="printZWO" id="printZWO">
+    <fieldset class="Design" id="resultListFieldset"> 
         <legend>Resulting List</legend>
         <table id="ResultTable">
             <thead>
@@ -272,19 +172,18 @@
             </tbody>
         </table>
     </fieldset>
+</div>
     
-</br>
+<br>
 
     <fieldset class="wetter" id="wetter">
         <legend>Weather</legend>
         <input class="input" name="wetter" id="InputWetter" placeholder="eg. Berlin, Stuttgart..." />
-        <button class="button" id="WetterButton" onclick="alert(displayWeather())">getWeather</button>
-    </br>
+        <button class="button" id="WetterButton" onclick="displayWeather()">getWeather</button>
+    <br>
     </fieldset>
-
-
-
-</br>
+    
+<br>
 
     <fieldset class="newsfeed" id="newsfeed">
         <legend>Tagesschau</legend>
@@ -292,7 +191,6 @@
     </fieldset>
         
 <br>
-    <button onclick="alert(getElementWidth())">Klicken</button>
 </body>
 
 </html>
