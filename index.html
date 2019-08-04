@@ -10,81 +10,6 @@
     <link rel='stylesheet' type='text/css' media='print' href='./css/printversion.css'>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src='./js/events.js'></script>
-
-
-    <style>
-        #wetter {
-            width: 98%;
-        }
-
-        .newsfeed {
-            width: 98%;
-            height: 500px;
-        }
-
-        iframe.newsfeed {
-            height: 450px;
-            width: 100%;
-            border-collapse: collapse;
-            border: 1px solid #2f4f4f;
-            border-radius: 5px;
-        }
-
-        .input:hover {
-            border: 2px solid #2f4f4f;
-        }
-
-        .input:hover {
-            border: 2px solid #2f4f4f;
-        }
-
-        .button:hover {
-            background-color: #2f4f4f;
-            color: #d0b0b0;
-        }
-
-        #ResultTable,
-        #ResultTable th,
-        #ResultTable td {
-            border-collapse: collapse;
-            border: 1px solid #2f4f4f;
-        }
-
-
-        th {
-            color: #2f4f4f;
-            font-weight: normal;
-            height: 25px;
-        }
-
-        table {
-            width: 100%;
-        }
-
-        .Design {
-            width: 550px;
-            position: absolute;
-            left: 500px;
-            top: 8px;
-        }
-
-        h1 {
-            color: #2f4f4f;
-        }
-
-        fieldset {
-            background-color: #f4ecec;
-            border: 1px solid #2f4f4f;
-            border-radius: 5px;
-            width: 350px;
-
-        }
-
-        legend {
-            color: #2f4f4f;
-            font-size: 200%;
-        }
-    </style>
 </head>
 
 <body style="background-color:#d0b0b0;">
@@ -221,43 +146,45 @@
     <br>
     <button class="button" id="send">Send</button>
     <button class="button" id="reset">Reset</button>
-    <button id="click">Klicken</button>
-    <button id="test" onclick="test()">Einfügen</button>
+    <button class="button" id="click">Klicken</button>
+    <button class="button" id="test" onclick="test()">Einfügen</button>
+    <button class="button" id="printVersion" onclick="printResultTable()">Print Calendar</button>
+
 
     <br>
 
-<div class="printZWO" id="printZWO">
-    <fieldset class="Design" id="resultListFieldset"> 
-        <legend>Resulting List</legend>
-        <table id="resultTable">
-            <thead>
-                <tr>
-                    <th id="titleOut">Title</th>
-                    <th id="organizerOut">Organizer</th>
-                    <th id="startOut">Start</th>
-                    <th id="endOut">End</th>
-                    <th id="statusOut">Status</th>
-                    <th id="locationOut">Location</th>
-                    <th id="alldayOut">Allday</th>
-                    <th id="categoriesOut">Category</th>
-                    <th id="webpageOut">WebPage</th>
-                    <th id="imageurlOut">Image</th>
-                </tr>
-            </thead>
-        </table>
-    </fieldset>
-</div>
-    
-<br>
+    <div class="printZWO" id="printZWO">
+        <fieldset class="Design" id="resultListFieldset">
+            <legend>Resulting List</legend>
+            <table id="resultTable">
+                <thead>
+                    <tr>
+                        <th id="titleOut">Title</th>
+                        <th id="organizerOut">Organizer</th>
+                        <th id="startOut">Start</th>
+                        <th id="endOut">End</th>
+                        <th id="statusOut">Status</th>
+                        <th id="locationOut">Location</th>
+                        <th id="alldayOut">Allday</th>
+                        <th id="categoriesOut">Category</th>
+                        <th id="webpageOut">WebPage</th>
+                        <th id="imageurlOut">Image</th>
+                    </tr>
+                </thead>
+            </table>
+        </fieldset>
+    </div>
+
+    <br>
 
     <fieldset class="wetter" id="wetter">
         <legend>Weather</legend>
         <input class="input" name="wetter" id="InputWetter" placeholder="eg. Berlin, Stuttgart..." />
         <button class="button" id="WetterButton" onclick="displayWeather()">getWeather</button>
-    <br>
+        <br>
     </fieldset>
-    
-<br>
+
+    <br>
 
     <!-- <fieldset class="newsfeed" id="newsfeed">
         <legend>Tagesschau</legend>

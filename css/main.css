@@ -1,70 +1,72 @@
-    #wetter{
-        width: 98%;
+#wetter{
+    width: 98%;
+}
+
+.newsfeed{
+    width: 98%;
+    height: 500px;
+}
+
+iframe.newsfeed{
+    height: 450px; 
+    width: 100%;
+    border-collapse: collapse;
+    border: 1px solid #2f4f4f;
+    border-radius: 5px;
+}
+
+.input:hover {
+        border: 2px solid #2f4f4f;
     }
 
-    .newsfeed{
-        width: 98%;
-        height: 500px;
+.button:hover {
+        background-color: #2f4f4f;
+        color: #d0b0b0;
     }
+    
 
-    iframe.newsfeed{
-        height: 450px; 
-        width: 100%;
+#resultTable,
+#resultTable th,
+#resultTable td {
         border-collapse: collapse;
         border: 1px solid #2f4f4f;
-        border-radius: 5px;
     }
 
-    .input:hover {
-            border: 2px solid #2f4f4f;
-        }
 
-    .button:hover {
-            background-color: #2f4f4f;
-            color: #d0b0b0;
-        }
+th {
+        color: #2f4f4f;
+        font-weight: normal;
+        height: 25px;
+    }
 
-    #ResultTable,
-    #ResultTable th,
-    #ResultTable td {
-            border-collapse: collapse;
-            border: 1px solid #2f4f4f;
-        }
+table {
+        width: 100%;
+    }
+
+.Design {
+        width: 825px;
+        position: absolute;
+        left: 400px;
+        top: 8px;
+        height: 420px;
+        
+      
+    }
+
+h1 {
+        color: #2f4f4f;
+    }
+
+fieldset {
+        background-color: #f4ecec;
+        border: 1px solid #2f4f4f;
+        border-radius: 5px;
+        width: 350px;
+    }
+
+legend {
+        color: #2f4f4f;
+        font-size: 200%;
+    }
 
 
-    th {
-            color: #2f4f4f;
-            font-weight: normal;
-            height: 25px;
-        }
-
-    table {
-            width: 100%;
-        }
-
-    .Design {
-            width: 825px;
-            position: absolute;
-            left: 400px;
-            top: 8px;
-        }
-
-    h1 {
-            color: #2f4f4f;
-        }
-
-    fieldset {
-            background-color: #f4ecec;
-            border: 1px solid #2f4f4f;
-            border-radius: 5px;
-            width: 350px;
-
-        }
-
-    legend {
-            color: #2f4f4f;
-            font-size: 200%;
-        }
-    
-
-    
