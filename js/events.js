@@ -1,5 +1,6 @@
 var allEvents = [];
 var allCategories = [];
+var sidebarOpen = false;
 
 $(document).ready(function () {
     getAllEvents();
@@ -44,7 +45,7 @@ $(document).ready(function () {
 
             var eventJSON = getInputData();
 
-            var file = document.querySelector('input[type=file]').files[0];//$("#imageurl")[0].files[0];
+            var file = document.querySelector('input[type=file]').files[0];
             var reader = new FileReader();
 
 
@@ -52,12 +53,12 @@ $(document).ready(function () {
                 eventJSON["imagedata"] = reader.result;
                 console.log(eventJSON);
 
-                var inputFields = JSON.stringify(eventJSON);
+
 
                 $.ajax({
                     type: "POST",
                     url: "https://dhbw.cheekbyte.de/calendar/claben/events",
-                    data: inputFields,
+                    data: JSON.stringify(eventJSON),
                     success: function () {
                         getAllEvents();
                         alert("Added Entry successfully");
@@ -134,7 +135,7 @@ function getAllEvents() {
                             }
                         }
                         else if (key == "imageurl") {
-                            data[$("#" + key + "Out")[0].cellIndex] = "<img height='80px' alt='No Image' src='" + element[key] + "'></img>";
+                            data[$("#" + key + "Out")[0].cellIndex] = "<img onclick='editImage()' height='80px' alt='No Image' src='" + element[key] + "'></img>";
                         }
                         else {
                             data[$("#" + key + "Out")[0].cellIndex] = element[key]
@@ -144,11 +145,12 @@ function getAllEvents() {
                 };
 
 
-                data[data.length] = "<button class='editButton' onclick='editEvent()'>Edit</button> <button class='deleteButton' onclick='deleteEvent()'>Delete</button>"
+                data[data.length] = "<button class='button' onclick='editEvent()'>Edit</button> <button class='button' onclick='deleteEvent()'>Delete</button> <button class='button' onclick='deleteImage()'>Delete Image</button>"
                 let newRow = document.getElementById("resultTableBody").insertRow(-1);
 
                 for (let i = 0; i < data.length; i++) {
                     let cell = newRow.insertCell(-1);
+                    if (i == 9 || i == 11) cell.className = "noPrint"
                     if (data[i] == null) cell.innerHTML = "-";
                     else {
                         cell.innerHTML = data[i];
@@ -161,6 +163,10 @@ function getAllEvents() {
         error: function (xhr, status, error) { alert("fail " + xhr.status + xhr.statusText + error) }
     });
 }
+function editImage() {
+    console.log("hey listen")
+}
+
 function getInputData() {
     let input = {};
     $(".input").each(function (key, value) {
@@ -196,7 +202,6 @@ function getInputData() {
 
 function addCategory() {
     let category = '{"name":' + '"' + $("#newCategory")[0].value + '"}';
-    console.log(category);
     $.ajax({
         type: "POST",
         url: "https://dhbw.cheekbyte.de/calendar/claben/categories",
@@ -258,19 +263,20 @@ function addCategoryDialog() {
     }
 }
 
-function getImageData() {
-    console.log(document.querySelector('input[type=file]').files[0]);
-    var file = document.querySelector('input[type=file]').files[0];//$("#imageurl")[0].files[0];
-    var reader = new FileReader();
+function deleteImage() {
+    var id = allEvents[$(event.target).closest("tr")[0].rowIndex - 1].id;
+    $.ajax({
+        type: "DELETE",
+        url: "https://dhbw.cheekbyte.de/calendar/claben/images/" + id,
+        success: function (result, status, xhr) {
+            alert("Deleted Image");
+            getAllEvents();
+        },
+        error: function (xhr, status, error) {
+            console.log(xhr.status)
+        }
 
-
-    reader.addEventListener("load", function () {
-        return reader.result;
-    }, false);
-
-    if (file) {
-        reader.readAsDataURL(file);
-    }
+    });
 }
 
 //Test functions
@@ -282,35 +288,49 @@ function editEvent() {
     data = allEvents[$(event.target).closest("tr")[0].rowIndex - 1];
     let input = getInputData();
     console.log(allEvents[$(event.target).closest("tr")[0].rowIndex - 1]);
-    // $(".input").each(function (key, value) {
-    //     if (this.value != "") {
-    //         input[this.id] = this.value;
-    //     }
-    // });
-    // console.log(input);
-    // if (input["categories"] == "None") {
-    //     delete input["categories"];
-    // }
-    // else {
-    //     input["categories"] = [allCategories[$("#categories")[0].selectedIndex - 1]];
-    // }
+
 
     for (let key in input) {
         data[key] = input[key];
     }
-    console.log(input);
-    $.ajax({
-        type: "PUT",
-        url: "https://dhbw.cheekbyte.de/calendar/claben/events/" + data.id,
-        data: JSON.stringify(data),
-        success: function () {
-            alert("success");
-            getAllEvents();
-        },
-        error: function (xhr, status, error) {
-            console.log(xhr.status)
-        }
+    console.log(input)
+    var file = document.querySelector('input[type=file]').files[0];
+    var reader = new FileReader();
+
+
+    reader.addEventListener("load", function () {
+        if (reader.result != null) data["imagedata"] = reader.result;
+        console.log(data);
+
+        $.ajax({
+            type: "PUT",
+            url: "https://dhbw.cheekbyte.de/calendar/claben/events/" + data.id,
+            data: JSON.stringify(data),
+            success: function () {
+                alert("success");
+                getAllEvents();
+            },
+            error: function (xhr, status, error) {
+                console.log(xhr.status)
+            }
+        });
     });
+    if (file) {
+        reader.readAsDataURL(file);
+    } else {
+        $.ajax({
+            type: "PUT",
+            url: "https://dhbw.cheekbyte.de/calendar/claben/events/" + data.id,
+            data: JSON.stringify(data),
+            success: function () {
+                alert("success");
+                getAllEvents();
+            },
+            error: function (xhr, status, error) {
+                console.log(xhr.status)
+            }
+        })
+    }
 }
 
 function deleteEvent() {
@@ -370,10 +390,19 @@ function displayWeather() {
  */
 
 function printResultTable() {
-    var printTable = document.getElementById("printZWO");
-    var printTitle = document.getElementById("site"); // printing tag "title" possible but does not look nice 
-    var printArea = window.open();
-    printArea.document.write(printTable.innerHTML); // then: printArea.document.write(printTitle.innerHTML, printTable.innerHTML);
-    printArea.print();
-    printArea.close();
+    window.print();
+}
+
+/* Set the width of the sidebar to 250px and the left margin of the page content to 250px */
+function toggleInput() {
+
+    if (!sidebarOpen) {
+        document.getElementById("inputSidebar").style.width = "450px";
+        document.getElementById("main").style.marginLeft = "450px";
+    }
+    else {
+        document.getElementById("inputSidebar").style.width = "0";
+        document.getElementById("main").style.marginLeft = "0";
+    }
+    sidebarOpen = !sidebarOpen;
 }

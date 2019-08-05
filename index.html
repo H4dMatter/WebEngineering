@@ -13,201 +13,210 @@
 </head>
 
 <body style="background-color:#d0b0b0;">
+    <div id="inputSidebar" class="sidebar">
+        <fieldset id="mandatory">
+            <legend>Mandatory Inputs</legend>
+            <table class="InputTable">
+                <tr>
+                    <td>
+                        <label for="title">Title</label>
+                    </td>
+                    <td>
+                        <input type="text" id="title" name="Title" placeholder="(Title)" maxlength="50" class="input"
+                            required="required" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label for="organizer">Email</label>
+                    </td>
+                    <td>
+                        <input type="email" id="organizer" name="Organizer" placeholder="(E-Mail)" maxlength="50"
+                            class="input" required="required" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label for="start">From</label>
+                    </td>
+                    <td>
+                        <input type="datetime-local" id="start" name="start" class="input" required="required" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label for="end">To</label>
+                    </td>
+                    <td>
+                        <input type="datetime-local" id="end" name="end" class="input" required="required" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label for="status">Shown as</label>
+                    </td>
+                    <td>
+                        <select id="status" name="status" value="Busy" class="input">
+                            <option>Busy</option>
+                            <option>Free</option>
+                            <option>Tentative</option>
+                        </select>
+                    </td>
+                </tr>
 
-    <fieldset id="mandatory">
-        <legend>Mandatory Inputs</legend>
-        <table class="InputTable">
-            <tr>
-                <td>
-                    <label for="title">Title</label>
-                </td>
-                <td>
-                    <input type="text" id="title" name="Title" placeholder="(Title)" maxlength="50" class="input"
-                        required="required" />
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <label for="organizer">Email</label>
-                </td>
-                <td>
-                    <input type="email" id="organizer" name="Organizer" placeholder="(E-Mail)" maxlength="50"
-                        class="input" required="required" />
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <label for="start">From</label>
-                </td>
-                <td>
-                    <input type="datetime-local" id="start" name="start" class="input" required="required" />
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <label for="end">To</label>
-                </td>
-                <td>
-                    <input type="datetime-local" id="end" name="end" class="input" required="required" />
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <label for="status">Shown as</label>
-                </td>
-                <td>
-                    <select id="status" name="status" value="Busy" class="input">
-                        <option>Busy</option>
-                        <option>Free</option>
-                        <option>Tentative</option>
-                    </select>
-                </td>
-            </tr>
-
-        </table>
-
-    </fieldset>
-
-    <br>
-
-    <fieldset id="optional">
-        <legend>Optional Inputs</legend>
-        <table class="InputTable">
-            <tr>
-                <td>
-                    <label for="location">Location</label>
-                </td>
-                <td>
-                    <input type="text" id="location" name="Location" placeholder="(Location)" maxlength="50"
-                        class="input" />
-
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <label for="allday">Allday</label>
-                </td>
-                <td>
-                    <input type="radio" id="allday" name="allday" value="allday">Yes</input>
-                    <input type="radio" name="allday" value="allday" checked="checked">No</input>
-                </td>
-            </tr>
-
-            <tr>
-                <td>
-                    <label for="categories">Category</label>
-                </td>
-                <td id="categoriesField">
-                    <select name="categories" id="categories" class="input" onchange="addCategoryDialog()">
-                        <option selected>None</option>
-                        <option>Add category</option>
-                    </select>
-                    <input type="text" id="newCategory" name="newCategory" placeholder="(New Category)" maxlength="30"
-                        hidden="false" />
-                    <button type="button" id="addCategory" hidden>Add</button>
-                    <button type="button" id="deleteCategory" hidden>Delete</button>
-                </td>
-                <td>
-
-                </td>
-            </tr>
-
-            <tr>
-                <td>
-                    <label for="inputurl">URL</label>
-                </td>
-                <td>
-                    <datalist id="urlList">
-                        <option label="DHBW" value="http://www.dhbw-stuttgart.de"></option>
-                        <option label="HPE" value="https://www.hpe.com/us/en/home.html"></option>
-                        <option label="DXC" value="https://www.dxc.technology/"></option>
-                    </datalist>
-
-                    <input list="urlList" id="webpage" placeholder="(URL)" class="input" maxlength="100" />
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <label for="imageurl">Image</label>
-                </td>
-                <td>
-                    <input type="file" name="imageurl" id="imageurl" class="button" />
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <label for="extra">Comments</label>
-                </td>
-                <td>
-                    <textarea name="commentField" id="extra" rows="2" cols="20" placeholder="(Any Comments)"
-                        maxlength="2000" class="input"></textarea>
-                </td>
-            </tr>
-
-        </table>
-        <br>
-    </fieldset>
-
-    <br>
-    <button class="button" id="send">Send</button>
-    <button class="button" id="reset">Reset</button>
-    <button class="button" id="click">Klicken</button>
-    <button class="button" id="test">Testen</button>
-    <button class="button" id="printVersion" onclick="printResultTable()">Print Calendar</button>
-    <dialog>
-        <p>Greetings, one and all!</p>
-    </dialog>
-
-
-    <br>
-
-    <div class="printZWO" id="printZWO">
-        <fieldset class="Design" id="resultListFieldset">
-            <legend>Resulting List</legend>
-            <div class="scroll">
-            <table id="resultTable">
-                <thead>
-
-                    <tr>
-                        <th id="titleOut">Title</th>
-                        <th id="organizerOut">Organizer</th>
-                        <th id="startOut">Start</th>
-                        <th id="endOut">End</th>
-                        <th id="statusOut">Status</th>
-                        <th id="locationOut">Location</th>
-                        <th id="alldayOut">Allday</th>
-                        <th id="categoriesOut">Category</th>
-                        <th id="webpageOut">WebPage</th>
-                        <th id="imageurlOut">Image</th>
-                        <th id="buttonField">Edit/Delete</th>
-
-                    </tr>
-                </thead>
-                <tbody id="resultTableBody">
-
-                </tbody>
             </table>
-        </div>
+
         </fieldset>
-    </div>
 
-    <br>
-
-    <fieldset class="wetter" id="wetter">
-        <legend>Weather</legend>
-        <input class="input" name="wetter" id="InputWetter" placeholder="eg. Berlin, Stuttgart..." />
-        <button class="button" id="WetterButton" onclick="displayWeather()">getWeather</button>
         <br>
-    </fieldset>
 
-    <br>
+        <fieldset id="optional">
+            <legend>Optional Inputs</legend>
+            <table class="InputTable">
+                <tr>
+                    <td>
+                        <label for="location">Location</label>
+                    </td>
+                    <td>
+                        <input type="text" id="location" name="Location" placeholder="(Location)" maxlength="50"
+                            class="input" />
 
-    <fieldset class="newsfeed" id="newsfeed">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label for="allday">Allday</label>
+                    </td>
+                    <td>
+                        <input type="radio" id="allday" name="allday" value="allday">Yes</input>
+                        <input type="radio" name="allday" value="allday" checked="checked">No</input>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        <label for="categories">Category</label>
+                    </td>
+                    <td id="categoriesField">
+                        <select name="categories" id="categories" class="input" onchange="addCategoryDialog()">
+                            <option selected>None</option>
+                            <option>Add category</option>
+                        </select>
+                        <input type="text" id="newCategory" name="newCategory" placeholder="(New Category)"
+                            maxlength="30" hidden="false" />
+                        <button type="button" id="addCategory" hidden>Add</button>
+                        <button type="button" id="deleteCategory" hidden>Delete</button>
+                    </td>
+                    <td>
+
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        <label for="inputurl">URL</label>
+                    </td>
+                    <td>
+                        <datalist id="urlList">
+                            <option label="DHBW" value="http://www.dhbw-stuttgart.de"></option>
+                            <option label="HPE" value="https://www.hpe.com/us/en/home.html"></option>
+                            <option label="DXC" value="https://www.dxc.technology/"></option>
+                        </datalist>
+
+                        <input list="urlList" id="webpage" placeholder="(URL)" class="input" maxlength="100" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label for="imageurl">Image</label>
+                    </td>
+                    <td>
+                        <input type="file" accept="image/*" name="imageurl" id="imageurl" class="button" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label for="extra">Comments</label>
+                    </td>
+                    <td>
+                        <textarea name="commentField" id="extra" rows="2" cols="20" placeholder="(Any Comments)"
+                            maxlength="2000" class="input"></textarea>
+                    </td>
+                </tr>
+
+            </table>
+            <br>
+        </fieldset>
+
+        <br>
+        <fieldset>
+            <button class="button" id="send">Send</button>
+            <button class="button" id="reset">Reset</button>
+            <button class="button" id="click">Klicken</button>
+            <button class="button" id="test">Testen</button>
+            <button class="button" id="printVersion" onclick="printResultTable()">Print Calendar</button>
+        </fieldset>
+        <br>
+    </div>
+    <table id="main">
+        <tr class="printZWO" id="printZWO">
+            <td>
+                <fieldset class="Design" id="resultListFieldset">
+                    <legend>Calendar</legend>
+                    <div class="scroll">
+                        <table id="resultTable">
+                            <thead>
+
+                                <tr>
+                                    <th id="titleOut">Title</th>
+                                    <th id="organizerOut">Organizer</th>
+                                    <th id="startOut">Start</th>
+                                    <th id="endOut">End</th>
+                                    <th id="statusOut">Status</th>
+                                    <th id="locationOut">Location</th>
+                                    <th id="alldayOut">Allday</th>
+                                    <th id="categoriesOut">Category</th>
+                                    <th id="webpageOut">WebPage</th>
+                                    <th class="noPrint" id="imageurlOut">Image</th>
+                                    <th id="extraOut">Comments</th>
+                                    <th class="noPrint" id="buttonField">Edit/Delete</th>
+
+                                </tr>
+                            </thead>
+                            <tbody id="resultTableBody">
+
+                            </tbody>
+                        </table>
+                    </div>
+                </fieldset>
+            </td>
+        </tr>
+
+        <br>
+        <tr id="extraFeatures" class="rowElement">
+            <td>
+                <p>
+                    <button class="button" id="WetterButton" onclick="toggleInput()">Show/hide input fields</button>
+                </p>
+                <fieldset class="wetter" id="wetter">
+                    <legend>Weather</legend>
+                    <input class="input" name="wetter" id="InputWetter" placeholder="eg. Berlin, Stuttgart..." />
+                    <button class="button" id="WetterButton" onclick="displayWeather()">getWeather</button>
+                    <br>
+                </fieldset>
+
+                <br>
+
+                <!-- <fieldset class="newsfeed" id="newsfeed">
         <legend>Tagesschau</legend>
         <iframe src="https://www.tagesschau.de" class="newsfeed"></iframe>
     </fieldset> -->
 
-    <br>
+                <br>
+            </td>
+        </tr>
+    </table>
+
 </body>
 
 </html>
