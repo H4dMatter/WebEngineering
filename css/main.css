@@ -44,13 +44,12 @@ table {
     }
 
 .Design {
-        width: 825px;
-        position: absolute;
+        width: 70% ;
+        /* 1025px; */
+        position: absolute; 
         left: 400px;
         top: 8px;
         height: 420px;
-        
-      
     }
 
 h1 {
@@ -69,4 +68,10 @@ legend {
         font-size: 200%;
     }
 
+    textarea{
+        resize: none;
+    }
+#categoriesField{
+    padding-right:0px;
+}
 

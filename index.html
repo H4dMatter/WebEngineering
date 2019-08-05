@@ -97,13 +97,18 @@
                 <td>
                     <label for="categories">Category</label>
                 </td>
-                <td>
-                    <select name="categories" id="categories" class="input">
-                        <option>Private</option>
-                        <option>Business</option>
+                <td id="categoriesField">
+                    <select name="categories" id="categories" class="input" onchange="addCategoryDialog()">
                         <option selected>None</option>
                         <option>Add category</option>
                     </select>
+                    <input type="text" id="newCategory" name="newCategory" placeholder="(New Category)" maxlength="30"
+                        hidden="false" />
+                    <button type="button" id="addCategory" hidden>Add</button>
+                    <button type="button" id="deleteCategory" hidden>Delete</button>
+                </td>
+                <td>
+
                 </td>
             </tr>
 
@@ -112,29 +117,29 @@
                     <label for="inputurl">URL</label>
                 </td>
                 <td>
-                    <datalist id="url">
+                    <datalist id="urlList">
                         <option label="DHBW" value="http://www.dhbw-stuttgart.de"></option>
                         <option label="HPE" value="https://www.hpe.com/us/en/home.html"></option>
                         <option label="DXC" value="https://www.dxc.technology/"></option>
                     </datalist>
 
-                    <input list="url" id="inputurl" placeholder="(URL)" class="input" maxlength="100" />
+                    <input list="urlList" id="webpage" placeholder="(URL)" class="input" maxlength="100" />
                 </td>
             </tr>
             <tr>
                 <td>
-                    <label for="imageUpload">Image</label>
+                    <label for="imageurl">Image</label>
                 </td>
                 <td>
-                    <input type="file" name="imageUpload" id="imageUpload" class="button" />
+                    <input type="file" name="imageurl" id="imageurl" class="button" />
                 </td>
             </tr>
             <tr>
                 <td>
-                    <label for="commentField">Comments</label>
+                    <label for="extra">Comments</label>
                 </td>
                 <td>
-                    <textarea name="commentField" id="commentField" rows="2" cols="20" placeholder="(Any Comments)"
+                    <textarea name="commentField" id="extra" rows="2" cols="20" placeholder="(Any Comments)"
                         maxlength="2000" class="input"></textarea>
                 </td>
             </tr>
@@ -147,7 +152,7 @@
     <button class="button" id="send">Send</button>
     <button class="button" id="reset">Reset</button>
     <button class="button" id="click">Klicken</button>
-    <button class="button" id="test" onclick="test()">Einfügen</button>
+    <button class="button" id="test">Testen</button>
     <button class="button" id="printVersion" onclick="printResultTable()">Print Calendar</button>
 
 
@@ -155,7 +160,7 @@
 
     <div class="printZWO" id="printZWO">
         <fieldset class="Design" id="resultListFieldset">
-            <legend>Resulting List</legend>
+            <legend>Calendar</legend>
             <table id="resultTable">
                 <thead>
                     <tr>
@@ -169,8 +174,13 @@
                         <th id="categoriesOut">Category</th>
                         <th id="webpageOut">WebPage</th>
                         <th id="imageurlOut">Image</th>
+                        <th id="buttonField">Edit/Delete</th>
+
                     </tr>
                 </thead>
+                <tbody id="resultTableBody">
+
+                </tbody>
             </table>
         </fieldset>
     </div>
@@ -189,9 +199,9 @@
     <!-- <fieldset class="newsfeed" id="newsfeed">
         <legend>Tagesschau</legend>
         <iframe src="https://www.tagesschau.de" class="newsfeed"></iframe>
-    </fieldset>
-        
-<br>
+    </fieldset> -->
+
+    <br>
 </body>
 
 </html>
