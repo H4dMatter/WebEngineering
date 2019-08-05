@@ -50,6 +50,7 @@ table {
         left: 400px;
         top: 8px;
         height: 420px;
+        overflow: scroll;
     }
 
 h1 {
@@ -75,3 +76,6 @@ legend {
     padding-right:0px;
 }
 
+#printZWO{
+    overflow: hidden;
+}
