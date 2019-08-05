@@ -1,47 +1,41 @@
-#wetter{
-    width: 98%;
-}
-
-.newsfeed{
-    width: 98%;
-    height: 500px;
-}
-
-iframe.newsfeed{
-    height: 450px; 
-    width: 100%;
-    border-collapse: collapse;
-    border: 1px solid #2f4f4f;
-    border-radius: 5px;
-}
-
-.input:hover {
-        border: 2px solid #2f4f4f;
+    #wetter{
+        width: 98%;
     }
 
-.button:hover {
-        background-color: #2f4f4f;
-        color: #d0b0b0;
+    .newsfeed{
+        width: 98%;
+        height: 500px;
     }
-    
 
-#resultTable,
-#resultTable th,
-#resultTable td {
+    iframe.newsfeed{
+        height: 450px; 
+        width: 100%;
         border-collapse: collapse;
         border: 1px solid #2f4f4f;
+        border-radius: 5px;
     }
 
+    .input:hover {
+            border: 2px solid #2f4f4f;
+        }
 
-th {
-        color: #2f4f4f;
-        font-weight: normal;
-        height: 25px;
+    .button:hover {
+            background-color: #2f4f4f;
+            color: #d0b0b0;
+        }
+        
+    .scroll{
+        overflow: auto;
+        width:825px;
+        height: 375px;
     }
 
-table {
-        width: 100%;
-    }
+    #resultTable,
+    #resultTable th,
+    #resultTable td {
+            border-collapse: collapse;
+            border: 1px solid #2f4f4f;
+        }
 
 .Design {
         width: 70% ;
@@ -53,29 +47,40 @@ table {
         overflow: scroll;
     }
 
-h1 {
-        color: #2f4f4f;
-    }
+    th {
+            color: #2f4f4f;
+            font-weight: normal;
+            height: 25px;
+        }
 
-fieldset {
-        background-color: #f4ecec;
-        border: 1px solid #2f4f4f;
-        border-radius: 5px;
-        width: 350px;
-    }
+    table {
+            width: 100%;
+        }
 
-legend {
-        color: #2f4f4f;
-        font-size: 200%;
-    }
+    .Design {
+            width: 830px;
+            position: absolute;
+            left: 400px;
+            top: 8px;
+            height: 420px;
+          
+        }
 
-    textarea{
-        resize: none;
-    }
-#categoriesField{
-    padding-right:0px;
-}
+    h1 {
+            color: #2f4f4f;
+        }
 
-#printZWO{
-    overflow: hidden;
-}
+    fieldset {
+            background-color: #f4ecec;
+            border: 1px solid #2f4f4f;
+            border-radius: 5px;
+            width: 350px;
+        }
+
+    legend {
+            color: #2f4f4f;
+            font-size: 200%;
+        }
+    
+
+    
