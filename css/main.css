@@ -37,6 +37,15 @@
             border: 1px solid #2f4f4f;
         }
 
+.Design {
+        width: 70% ;
+        /* 1025px; */
+        position: absolute; 
+        left: 400px;
+        top: 8px;
+        height: 420px;
+        overflow: scroll;
+    }
 
     th {
             color: #2f4f4f;
