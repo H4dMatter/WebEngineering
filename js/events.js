@@ -6,40 +6,7 @@ $(document).ready(function () {
     getAllEvents();
     getAllCategories();
 
-    $("#reset").click(
-        function gatherData() {
-            var eventJSON = {};
-            var inputFields = $(".input");
 
-            console.log($(".input"));
-            console.log($("#allday")[0].checked)
-            $(".input").each(function (key, value) {
-
-                if (this.value != "") {
-                    eventJSON[this.id] = this.value.trim();
-                }
-            });
-            eventJSON["allday"] = $("#allday")[0].checked;
-            if ($("#allday")[0].checked) {
-                console.log(eventJSON["start"].substring(0, eventJSON["start"].indexOf('T')))
-                //eventJSON["start"] = eventJSON["start"].substring(0, eventJSON["start"].indexOf('T'))
-            }
-            if (eventJSON["categories"] = "None") {
-                delete eventJSON["categories"];
-            }
-            console.log(eventJSON);
-            //return eventJSON;
-        }
-    );
-
-
-
-    /**
-    * This function takes the inputs of the user and constructs a string(or maybe JSON object)
-    * that can be fed to the addEvent function
-    * @returns JSON object in event format
-    * 
-    */
     $("#send").click(
         function addEvent() {
 
@@ -51,9 +18,6 @@ $(document).ready(function () {
 
             reader.addEventListener("load", function () {
                 eventJSON["imagedata"] = reader.result;
-                console.log(eventJSON);
-
-
 
                 $.ajax({
                     type: "POST",
@@ -63,46 +27,57 @@ $(document).ready(function () {
                         getAllEvents();
                         alert("Added Entry successfully");
                     },
-                    error: function (xhr, status, error) { alert("fail " + xhr.status + xhr.statusText + error) }
+                    error: function (xhr, status, error) { alert("Could not create a valid entry with your input.If allday is set to yes, your event must be from 00:00 AM to 23:59 PM on any days.") }
                 });
             }, false);
 
             if (file) {
                 reader.readAsDataURL(file);
             }
+            else {
+                $.ajax({
+                    type: "POST",
+                    url: "https://dhbw.cheekbyte.de/calendar/claben/events",
+                    data: JSON.stringify(eventJSON),
+                    success: function () {
+                        getAllEvents();
+                        alert("Added Entry successfully");
+                    },
+                    error: function (xhr, status, error) { alert("Could not create a valid entry with your input.If allday is set to yes, your event must be from 00:00 AM to 23:59 PM on any days.") }
 
-
+                });
+            }
 
         }
     );
 
-    $("#click").click(getAllEvents);
     $("#addCategory").click(addCategory);
     $("#deleteCategory").click(deleteCategory);
 
-
-    $("#test").click(test);
 });
 
+//Gets all the available Categories from the server
 function getAllCategories() {
     $.ajax({
         type: "GET",
         url: "https://dhbw.cheekbyte.de/calendar/claben/categories",
         success: function (result, status, xhr) {
             allCategories = result;
-            console.log(allCategories);
+
             $("#categories").empty();
             $("#categories").append("<option selected>None</option>");
             allCategories.forEach(element => {
                 $("#categories").append("<option>" + element.name + "</option>")
             });
             $("#categories").append("<option>Add category</option>");
+            $("#categories").append("<option>Delete category</option>");
         },
         error: function (xhr, status, error) { alert("fail " + xhr.status + xhr.statusText + error) }
     });
 
 }
 
+//gets all events saved for the user
 function getAllEvents() {
     allEvents = [];
 
@@ -118,7 +93,7 @@ function getAllEvents() {
 
             result.forEach(element => {
                 var data = [];
-                console.log(element)
+
                 for (let key in element) {
                     if ($("#" + key + "Out")[0] != null) {
                         if (key == "start" || key == "end") data[$("#" + key + "Out")[0].cellIndex] = element[key].replace("T", " ").replace(new RegExp("-", 'g'), "/");
@@ -135,7 +110,9 @@ function getAllEvents() {
                             }
                         }
                         else if (key == "imageurl") {
-                            data[$("#" + key + "Out")[0].cellIndex] = "<img onclick='editImage()' height='80px' alt='No Image' src='" + element[key] + "'></img>";
+                            if (element[key] != null) data[$("#" + key + "Out")[0].cellIndex] = "<img onclick='editImage()' height='80px' alt='No Image' src='" + element[key] + "'></img>";
+                            else data[$("#" + key + "Out")[0].cellIndex] = "<img onclick='editImage()' height='80px' alt='No Image' src=''></img>";
+
                         }
                         else {
                             data[$("#" + key + "Out")[0].cellIndex] = element[key]
@@ -145,13 +122,13 @@ function getAllEvents() {
                 };
 
 
-                data[data.length] = "<button class='button' onclick='editEvent()'>Edit</button> <button class='button' onclick='deleteEvent()'>Delete</button> <button class='button' onclick='deleteImage()'>Delete Image</button>"
+                data[data.length] = "<button class='button' onclick='editEvent()'>Edit Entry</button> <button class='button' onclick='deleteImage()'>Delete Image</button> <button class='button' onclick='deleteEvent()'>Delete Entry</button>"
                 let newRow = document.getElementById("resultTableBody").insertRow(-1);
 
                 for (let i = 0; i < data.length; i++) {
                     let cell = newRow.insertCell(-1);
                     if (i == 9 || i == 11) cell.className = "noPrint"
-                    if (data[i] == null) cell.innerHTML = "-";
+                    if (data[i] == null || data[i] == "None") cell.innerHTML = "-";
                     else {
                         cell.innerHTML = data[i];
                     }
@@ -160,13 +137,16 @@ function getAllEvents() {
             });
 
         },
-        error: function (xhr, status, error) { alert("fail " + xhr.status + xhr.statusText + error) }
+        error: function (xhr, status, error) { alert("failed while retreving entries from server :  " + xhr.status + xhr.statusText + ".Please reload the site. If the error persists check your connection to the server") }
     });
 }
-function editImage() {
-    console.log("hey listen")
-}
 
+/**
+   * This function takes the inputs of the user and constructs a JSON object
+   * that can be fed to the addEvent function
+   * @returns JSON object in event format
+   * 
+   */
 function getInputData() {
     let input = {};
     $(".input").each(function (key, value) {
@@ -177,6 +157,7 @@ function getInputData() {
     input["allday"] = $("#allday")[0].checked;
     if ($("#allday")[0].checked) {
         if (input["start"] == null) {
+            console.log($("#allday")[0])
             let help = new Date(Date.now());
             help.setUTCHours(0, 0, 0, 0);
             input["start"] = help.toISOString().substring(0, 16);
@@ -190,16 +171,18 @@ function getInputData() {
         }
     }
 
-    if (input["categories"] == "None") {
+    if (input["categories"] == "None" || input["categories"] == "Delete category") {
         delete input["categories"];
     }
+
     else {
         input["categories"] = [allCategories[$("#categories")[0].selectedIndex - 1]];
     }
-    console.log(input);
+
     return input;
 }
 
+//Adds a catagory to the server
 function addCategory() {
     let category = '{"name":' + '"' + $("#newCategory")[0].value + '"}';
     $.ajax({
@@ -221,6 +204,7 @@ function addCategory() {
     });
 }
 
+//Deletes a category from the server
 function deleteCategory() {
     id = allCategories[$("#categories")[0].selectedIndex - 1].id;
     $.ajax({
@@ -230,6 +214,7 @@ function deleteCategory() {
             alert("Category deleted successfully")
             clearCategoryDialog();
             getAllCategories();
+            getAllEvents();
 
         },
         error: function (xhr, status, error) {
@@ -245,7 +230,7 @@ function clearCategoryDialog() {
     $("#newCategory").prop("hidden", true);
 }
 function addCategoryDialog() {
-    if ($(event.target)[0].value == "None") {
+    if ($(event.target)[0].value == "None" || $(event.target)[0].value == "Delete category") {
         clearCategoryDialog()
     }
     else {
@@ -263,6 +248,7 @@ function addCategoryDialog() {
     }
 }
 
+//Deletes image of corresponding event
 function deleteImage() {
     var id = allEvents[$(event.target).closest("tr")[0].rowIndex - 1].id;
     $.ajax({
@@ -273,41 +259,52 @@ function deleteImage() {
             getAllEvents();
         },
         error: function (xhr, status, error) {
-            console.log(xhr.status)
+            alert("No Image to delete");
         }
 
     });
 }
 
-//Test functions
-function test() {
-    console.log(getImageData());
+//resets the input fields
+function resetInput() {
+    $(".input").each(function (key, value) {
+        if (key == 4) this.value = "Busy";
+        else if (key == 6) {
+            this.value = "None";
+            clearCategoryDialog();
+        }
+        else this.value = "";
+    });
 }
 
+//Rdit all fields with a corresponding input for an event
 function editEvent() {
     data = allEvents[$(event.target).closest("tr")[0].rowIndex - 1];
     let input = getInputData();
-    console.log(allEvents[$(event.target).closest("tr")[0].rowIndex - 1]);
+
 
 
     for (let key in input) {
         data[key] = input[key];
     }
-    console.log(input)
+    if ($("#categories")[0].selectedIndex == allCategories.length + 2) {
+        data["categories"] = [];
+    }
+
     var file = document.querySelector('input[type=file]').files[0];
     var reader = new FileReader();
 
 
     reader.addEventListener("load", function () {
         if (reader.result != null) data["imagedata"] = reader.result;
-        console.log(data);
+
 
         $.ajax({
             type: "PUT",
             url: "https://dhbw.cheekbyte.de/calendar/claben/events/" + data.id,
             data: JSON.stringify(data),
             success: function () {
-                alert("success");
+                alert("Event edited successfully");
                 getAllEvents();
             },
             error: function (xhr, status, error) {
@@ -323,7 +320,7 @@ function editEvent() {
             url: "https://dhbw.cheekbyte.de/calendar/claben/events/" + data.id,
             data: JSON.stringify(data),
             success: function () {
-                alert("success");
+                alert("Event edited successfully");
                 getAllEvents();
             },
             error: function (xhr, status, error) {
@@ -343,6 +340,7 @@ function deleteEvent() {
         success: function () {
             console.log("deleted")
             getAllEvents();
+
         },
         error: function (xhr, status, error) { alert("fail " + xhr.status + xhr.statusText + error) }
     });
@@ -366,7 +364,7 @@ function getElementWidth() {
  * When no location input: homepage-wetteronline
  */
 function displayWeather() {
-
+    clearWeather();
     try {
         var brk = document.createElement("br");
         var sibling = document.getElementById("InputWetter").value;
@@ -384,6 +382,13 @@ function displayWeather() {
 
 }
 
+//clears already existing weather windows
+function clearWeather() {
+    if ($("#wetter").find("iframe").tagName = "IFRAME") {
+        $("#wetter").find("iframe").remove();
+    }
+}
+
 /**
  * This function prints only the resulting table with all events
  * Printview coincides when pressing str+p
@@ -393,16 +398,24 @@ function printResultTable() {
     window.print();
 }
 
-/* Set the width of the sidebar to 250px and the left margin of the page content to 250px */
+/** 
+ * This functions toggles the visibility of the sidebar
+ * 
+*/
 function toggleInput() {
 
     if (!sidebarOpen) {
-        document.getElementById("inputSidebar").style.width = "450px";
+        document.getElementById("inputSidebar").style.width = "28vw";
+        document.getElementById("inputSidebar").style.minWidth = "300px";
         document.getElementById("main").style.marginLeft = "450px";
+        document.getElementById("sidebarToggle").innerHTML = "Hide input fields"
     }
     else {
         document.getElementById("inputSidebar").style.width = "0";
+        document.getElementById("inputSidebar").style.minWidth = "0";
         document.getElementById("main").style.marginLeft = "0";
+        document.getElementById("sidebarToggle").innerHTML = "Show input fields"
     }
     sidebarOpen = !sidebarOpen;
 }
+

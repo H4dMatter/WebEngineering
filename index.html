@@ -56,8 +56,8 @@
                         <label for="status">Shown as</label>
                     </td>
                     <td>
-                        <select id="status" name="status" value="Busy" class="input">
-                            <option>Busy</option>
+                        <select id="status" name="status" class="input">
+                            <option selected>Busy</option>
                             <option>Free</option>
                             <option>Tentative</option>
                         </select>
@@ -68,7 +68,7 @@
 
         </fieldset>
 
-        <br>
+        <br />
 
         <fieldset id="optional">
             <legend>Optional Inputs</legend>
@@ -103,18 +103,15 @@
                             <option>Add category</option>
                         </select>
                         <input type="text" id="newCategory" name="newCategory" placeholder="(New Category)"
-                            maxlength="30" hidden="false" />
+                            maxlength="30" hidden />
                         <button type="button" id="addCategory" hidden>Add</button>
                         <button type="button" id="deleteCategory" hidden>Delete</button>
-                    </td>
-                    <td>
-
                     </td>
                 </tr>
 
                 <tr>
                     <td>
-                        <label for="inputurl">URL</label>
+                        <label for="webpage">URL</label>
                     </td>
                     <td>
                         <datalist id="urlList">
@@ -131,7 +128,8 @@
                         <label for="imageurl">Image</label>
                     </td>
                     <td>
-                        <input type="file" accept="image/*" name="imageurl" id="imageurl" class="button" />
+                        <input type="file" accept=".png,.jpg,.jpeg" name="imageurl" id="imageurl" class="button"
+                            onchange="checkFileSize()" />
                     </td>
                 </tr>
                 <tr>
@@ -145,18 +143,15 @@
                 </tr>
 
             </table>
-            <br>
+            <br />
         </fieldset>
 
-        <br>
-        <fieldset>
-            <button class="button" id="send">Send</button>
-            <button class="button" id="reset">Reset</button>
-            <button class="button" id="click">Klicken</button>
-            <button class="button" id="test">Testen</button>
-            <button class="button" id="printVersion" onclick="printResultTable()">Print Calendar</button>
+        <br />
+        <fieldset id="createButtonBox">
+            <button class="button" id="send">Create new Event</button>
+            <button class="button" id="resetnput" onclick="resetInput()">Reset input</button>
+
         </fieldset>
-        <br>
     </div>
     <table id="main">
         <tr class="printZWO" id="printZWO">
@@ -191,28 +186,51 @@
                 </fieldset>
             </td>
         </tr>
+        <!-- <br /> -->
+        <tr id="dialog" class="noPrint">
+            <td>
+                <fieldset>
+                    <h1>Welcome to the Pretty in Pink Calendar</h1>
+                    <p>
 
-        <br>
+                        You can edit any existing Event by filling out the corresponding input field, then pressing
+                        the
+                        "Edit event" button right of the entry you wish to edit.
+                        Fields you do not want to change can simply be left empty.
+                        You can also add the image of an event by uploading one and then pressing the edit button.
+                        To add a category, select the corresponding option from the Category menu. If you want to
+                        remove
+                        the category of an event, simply pick the "Delete Category" option and press edit next to
+                        the event whichs category you want to delete.
+
+                    </p>
+                    <div>
+                        <button class="button" id="sidebarToggle" onclick="toggleInput()">Show input
+                            fields</button>
+                        <button class="button" id="printVersion" onclick="printResultTable()">Print Calendar</button>
+                    </div>
+                </fieldset>
+            </td>
+        </tr>
         <tr id="extraFeatures" class="rowElement">
             <td>
-                <p>
-                    <button class="button" id="WetterButton" onclick="toggleInput()">Show/hide input fields</button>
-                </p>
+
                 <fieldset class="wetter" id="wetter">
                     <legend>Weather</legend>
                     <input class="input" name="wetter" id="InputWetter" placeholder="eg. Berlin, Stuttgart..." />
-                    <button class="button" id="WetterButton" onclick="displayWeather()">getWeather</button>
-                    <br>
+                    <button class="button" id="WetterButton" onclick="displayWeather()">Get Weather</button>
+                    <button class="button" onclick="clearWeather()">Clear Weather</button>
+                    <br />
                 </fieldset>
 
-                <br>
+                <br />
 
-                <!-- <fieldset class="newsfeed" id="newsfeed">
-        <legend>Tagesschau</legend>
-        <iframe src="https://www.tagesschau.de" class="newsfeed"></iframe>
-    </fieldset> -->
+                <fieldset class="newsfeed" id="newsfeed">
+                    <legend>News</legend>
+                    <iframe src="https://www.tagesschau.de" class="newsfeed"></iframe>
+                </fieldset>
 
-                <br>
+                <br />
             </td>
         </tr>
     </table>

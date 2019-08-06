@@ -1,8 +1,8 @@
 #wetter{
-        width: 98%;
+        width: 90%;
     }
 .newsfeed{
-        width: 98%;
+        width: 90%;
         height: 500px;
     }
 
@@ -38,12 +38,13 @@
         }
     #resultTable td {
         max-width: 600px;
-        overflow-wrap: break-word;
+        word-wrap: break-word;
     }
-.Design {
-        width: 70% ;
-        /* 1025px; */
-        /* position: absolute;  */
+    #resultTable {
+        width: 100%;
+    }
+    .Design {
+        width: 90% ;
         left: 400px;
         top: 8px;
         height: 420px;
@@ -56,9 +57,7 @@
             height: 25px;
         }
 
-    table {
-            width: 100%;
-        }
+    
 
 
     h1 {
@@ -70,7 +69,7 @@
             border: 1px solid #2f4f4f;
             border-radius: 5px;
             margin-left:10px;
-            width: 350px;
+            width: 90%;
         }
 
     legend {
@@ -83,23 +82,26 @@
  }   
 
  .sidebar {
-    height: 100%; /* 100% Full-height */
-    width: 0; /* 0 width - change this with JavaScript */
-    position: fixed; /* Stay in place */
+    height: 100%;
+    width: 0; 
+    min-width: 0;
+    position: fixed; 
     z-index: 1; /* Stay on top */
     top: 0;
     left: 0;
     background-color:#be8e8e;
     border-right: 2px solid #2f4f4f;
-    overflow-x: hidden; /* Disable horizontal scroll */
-    padding-top: 60px; /* Place content 60px from the top */
+    overflow-x: hidden;
+    padding-top: 60px;
     transition: 0.5s; /* 0.5 second transition effect to slide in the sidebar */
   }
-#printZWO{
-    width:100%;
+#main{
+    width: 100vw;
+    min-width: 80vw;
+    transition: 0.5s;
 }
-  #main{
-      width: 100%;
-  }
+#createButtonBox{
+    max-width:230px;
+}
 
     
